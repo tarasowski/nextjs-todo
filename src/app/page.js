@@ -16,7 +16,7 @@ const todos = [
 export default function Homepage() {
   const [myTodos, setMyTodos] = useState(todos)
 
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(10)
 
   const handleAddTodo = () => {
     setMyTodos(
