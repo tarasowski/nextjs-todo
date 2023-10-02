@@ -1,95 +1,66 @@
+"use client"
+
 import Image from 'next/image'
 import styles from './page.module.css'
+import Navigation from '@/components/navigation'
+import Button from "@/components/button"
+import { useState, useEffect } from "react"
 
-export default function Home() {
+const todos = [
+  { id: 1, description: "Auto putzen gehen" },
+  { id: 2, description: "Hausaufgaben erledigen" },
+  { id: 3, description: "Hausaufgaben erledigen" },
+  { id: 4, description: "Einkaufen gehen" }
+]
+
+export default function Homepage() {
+  const [myTodos, setMyTodos] = useState(todos)
+
+  const [count, setCount] = useState(0)
+
+  const handleAddTodo = () => {
+    setMyTodos(
+      [...myTodos, { id: myTodos.length + 1, description: "this is my test todo" }]
+    )
+  }
+
+  const hanldeIncrement = () => {
+    setCount(count + 1)
+  }
+
+  useEffect(() => {
+    console.log("my new todos", myTodos)
+  }, [myTodos])
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+    <div>
+      <main>
+        <h1>Welcome to my homepage in Nextjs</h1>
+        <br />
+        {count}
+        <br />
+        <br />
+        <button onClick={hanldeIncrement}>Increment</button>
+        <br />
+        <p>Here is my next js app</p>
+        <br />
+        <ul>
+        { myTodos.map(todo => {
+          return (
+            <li key={todo.id}>{todo.description}</li>
+          )
+        }) }
+        </ul>
+        <br />
+        <button onClick={handleAddTodo}>Add todo</button>
+        {/* 
+        <Button 
+        onClick={handleAddTodo}
+        text={"Todo hinzufügen"} 
         />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+        */}
+      </main>
+    </div>
+    
   )
 }
