@@ -1,7 +1,6 @@
 // per default is a server component
 export default async function TodoPage() {
-    const allPosts = await fetch('https://jsonplaceholder.typicode.com/posts', {
-    })
+    const allPosts = await fetch('https://jsonplaceholder.typicode.com/posts')
                         .then((response) => response.json())
     console.log(allPosts)
     return (
